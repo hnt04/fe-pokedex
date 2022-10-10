@@ -123,6 +123,7 @@ export const pokemonSlice = createSlice({
             const { search, type } = state;
             if ((search || type) && state.page === 1) {
                 state.pokemons = action.payload;
+                console.log(action.payload)
             } else {
                 state.pokemons = [...state.pokemons, ...action.payload];
             }
