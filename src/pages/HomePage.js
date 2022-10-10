@@ -4,6 +4,7 @@ import PokeList from '../components/PokeList';
 import { SearchBox } from '../components/SearchBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemons } from '../features/pokemons/pokemonSlice';
+import fetchData from "../data/fetchData";
 
 export const HomePage = () => {
 	const { search, page, type } = useSelector((state) => state.pokemons);
