@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPokemons } from '../features/pokemons/pokemonSlice';
 
 export const HomePage = () => {
-	const { search, page, type } = useSelector((state) => state.pokemons);
+	const { name, page, types } = useSelector((state) => state.pokemons);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getPokemons({ page, search, type }));
-	}, [page, search, type, dispatch]);
+		dispatch(getPokemons({ page, name, types }));
+	}, [page, name, types, dispatch]);
 	return (
 		<>
 			<PageTitle title="Pokedex" />

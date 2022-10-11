@@ -62,9 +62,9 @@ export const SearchBox = () => {
     } = methods;
     const dispatch = useDispatch();
 
-    const onSubmit = (data) => {
-        console.log(data)
-        dispatch(searchQuery(data.search))
+    const onSubmit = (result) => {
+        console.log(result)
+        dispatch(searchQuery(result.search))
         dispatch(changePage(1))
     };
 

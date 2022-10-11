@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import apiService from '../../app/apiService';
 import { POKEMONS_PER_PAGE } from '../../app/config';
 
-export const getPokemons = createAsyncThunk('pokemons/getPokemons', async ({ page, search, type }, { rejectWithValue }) => {
+export const getPokemons = createAsyncThunk('pokemons/getPokemons', async ({ page, name, types }, { rejectWithValue }) => {
     try {
         let url = `/pokemons?page=${page}&limit=${POKEMONS_PER_PAGE}`;
-        if (search) url += `&search=${search}`;
-        if (type) url += `&type=${type}`;
+        if (name) url += `&name=${name}`;
+        if (types) url += `&types=${types}`;
         const response = await apiService.get(url);
         const timeout = () => {
             return new Promise((resolve) => {
@@ -77,8 +77,8 @@ export const pokemonSlice = createSlice({
             nextPokemon: null,
             previousPokemon: null,
         },
-        search: '',
-        type: '',
+        name: '',
+        types: '',
         page: 1,
     },
     reducers: {
@@ -90,10 +90,10 @@ export const pokemonSlice = createSlice({
             }
         },
         typeQuery: (state, action) => {
-            state.type = action.payload;
+            state.types = action.payload;
         },
         searchQuery: (state, action) => {
-            state.search = action.payload;
+            state.name = action.payload;
         },
     },
     extraReducers: {
@@ -120,8 +120,8 @@ export const pokemonSlice = createSlice({
         },
         [getPokemons.fulfilled]: (state, action) => {
             state.loading = false;
-            const { search, type } = state;
-            if ((search || type) && state.page === 1) {
+            const { name, types } = state;
+            if ((name || types) && state.page === 1) {
                 state.pokemons = action.payload;
                 console.log(action.payload)
             } else {
